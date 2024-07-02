@@ -68,10 +68,16 @@ const app = http.createServer((req, res) => {
             res.setHeader('title', 'value')
 
             //writehead status code ve muti headers
-            res.writeHead(400, {
-                'content-encoding':'utf-8'
+            // res.writeHead(400, {
+            //     'content-encoding':'utf-8'
                 
+            // })
+
+            res.writeHead(400, 'hatalı islem', {
+                'content-encoding':'utf-8',
+                'multi-headers': 'test'
             })
+
 
             const obj = {
                 result: true,
