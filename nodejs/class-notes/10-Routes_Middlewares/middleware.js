@@ -122,16 +122,16 @@ app.get('/', (req, res) => {
 //     next()
 // })
 
-const middleware1 = (req, res, next) => {
-    console.log('middleware-1 çalıştı.')
-    next()
-    // next('route')
-}
+// const middleware1 = (req, res, next) => {
+//     console.log('middleware-1 çalıştı.')
+//     next()
+//     // next('route')
+// }
 
-const middleware2 = (req, res, next) => {
-    console.log('middleware-2 çalıştı.')
-    next()
-}
+// const middleware2 = (req, res, next) => {
+//     console.log('middleware-2 çalıştı.')
+//     next()
+// }
 
 // app.get('/', middleware1)
 //? use ile middleware çağırabiliriz:
@@ -146,21 +146,47 @@ const middleware2 = (req, res, next) => {
 // app.use('/test', [middleware1, middleware2]) // use() methodu all() methodu gibi tüm methodlara izin verir.
 // app.get('/test', [middleware1, middleware2]) // sadece get() için çalışır
 //? Middlewareleri direk route-controller öncesinde de çağırabiliriz:
-app.all('/*', [middleware1, middleware2], (req, res) => {
+// app.all('/*', [middleware1, middleware2], (req, res) => {
+
+//     res.send({
+//         message: 'Sorun yok.',
+//     })
+
+// })
+// app.get('/*', (req, res) => {
+
+//     res.send({
+//         message: 'next(route).',
+//     })
+
+// })
+
+/* ------------------------------------------------------- */
+// Ayrı dosyadan çağırma:
+
+// const middlewares = require('./middlewares/') // Array
+// const { middleware1, middleware2, middleware3 } = require('./middlewares/') // Object
+
+// app.get('/*', middleware1, middleware2, middleware3, (req, res) => {
+
+//     res.send({
+//         message: 'middlewares/index',
+//     })
+
+// })
+
+const middlewares = require('./middlewares/') // Object
+
+app.get('/*', middlewares.middleware1, middlewares.middleware2, middlewares.middleware3, (req, res) => {
 
     res.send({
-        message: 'Sorun yok.',
+        message: 'middlewares/index',
     })
 
 })
-app.get('/*', (req, res) => {
 
-    res.send({
-        message: 'next(route).',
-    })
-
-})
 
 
 /* ------------------------------------------------------- */
+
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
