@@ -13,6 +13,9 @@ const PORT = process.env.PORT || 8000;
 // Accept json data and convert to object:
 app.use(express.json())
 
+// Asnc errors to errorHandler:
+require('express-async-errors')
+
 // app.all('/', (req, res) => {
 //     res.send('WELCOME TO TODO API')
 // })
@@ -80,12 +83,36 @@ sequelize.authenticate()
     .catch(() => console.log('* DB Not Connected *'))
 
 /* ------------------------------------------------------- */
-// ROUTES :
+// ROUTES:
+
 const router = express.Router()
-router.port('/', (req, res)=>{
-    const receivedData=req.body
+
+// CREATE TODO:
+router.post('/', async (req, res) => {
+
+    // const receivedData = req.body
+    // // console.log(receivedData)
+
+    // const data = await Todo.create({
+    //     title: receivedData.title,
+    //     description: receivedData.description,
+    //     priority: receivedData.priority,
+    //     isDone: receivedData.isDone
+    // })
+    // // console.log(data)
+
+    const data = await Todo.create(req.body)
+    console.log(data)
+
+    res.status(201).send({
+        error: false,
+        result: data.dataValues
+    })
 
 })
+
+app.use(router)
+
 /* ------------------------------------------------------- */
 /* ------------------------------------------------------- */
 /* ------------------------------------------------------- */
