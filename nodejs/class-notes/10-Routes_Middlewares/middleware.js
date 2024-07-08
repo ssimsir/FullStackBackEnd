@@ -122,21 +122,22 @@ app.get('/', (req, res) => {
 //     next()
 // })
 
-// const middleware1 = (req, res, next) => {
-//     console.log('middleware-1 çalıştı.')
-//     next()
-//     // next('route')
-// }
+const middleware1 = (req, res, next) => {
+    console.log('middleware-1 çalıştı.')
+    next()
+    // next('route')
+}
 
-// const middleware2 = (req, res, next) => {
-//     console.log('middleware-2 çalıştı.')
-//     next()
-// }
+const middleware2 = (req, res, next) => {
+    console.log('middleware-2 çalıştı.')
+    next()
+}
 
-// app.get('/', middleware1)
+ //app.get('/', middleware2)
+
 //? use ile middleware çağırabiliriz:
-// app.use(middleware1)
-// app.use(middleware2)
+app.use(middleware1)
+app.use(middleware2)
 //? Tek use içinde virgülle ayırp kullanabiliriz:
 // app.use(middleware1, middleware2)
 // app.use(middleware2, middleware1)
@@ -175,15 +176,15 @@ app.get('/', (req, res) => {
 
 // })
 
-const middlewares = require('./middlewares/') // Object
+// const middlewares = require('./middlewares/') // Object
 
-app.get('/*', middlewares.middleware1, middlewares.middleware2, middlewares.middleware3, (req, res) => {
+// app.get('/*', middlewares.middleware1, middlewares.middleware2, middlewares.middleware3, (req, res) => {
 
-    res.send({
-        message: 'middlewares/index',
-    })
+//     res.send({
+//         message: 'middlewares/index',
+//     })
 
-})
+// })
 
 
 
