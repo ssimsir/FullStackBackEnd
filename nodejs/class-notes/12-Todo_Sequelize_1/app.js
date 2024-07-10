@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8000;
 // Accept json data and convert to object:
 app.use(express.json())
 
-// Asnc errors to errorHandler:
+// AsyncErrors to errorHandler:
 require('express-async-errors')
 
 // app.all('/', (req, res) => {
@@ -87,6 +87,21 @@ sequelize.authenticate()
 
 const router = express.Router()
 
+// LIST TODOS:
+router.get('/', async (req, res) => {
+
+    // const data = await Todo.findAll()
+    const data = await Todo.findAndCountAll()
+
+    res.status(200).send({
+        error: false,
+        result: data
+    })
+
+})
+
+// CRUD: Create Read Update Delete
+
 // CREATE TODO:
 router.post('/', async (req, res) => {
 
@@ -102,7 +117,7 @@ router.post('/', async (req, res) => {
     // // console.log(data)
 
     const data = await Todo.create(req.body)
-    console.log(data)
+    // console.log(data)
 
     res.status(201).send({
         error: false,
