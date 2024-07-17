@@ -97,7 +97,8 @@ const asyncFunction = async () => {
 app.get('/async', async (req, res, next) => {
 
     // await asyncFunction()
-    throw new Error('async-error', {cause: 'async function içinde bir hatadır'})
+    res.errorStatusCode = 400
+    throw new Error('async-error', { cause: 'async function içinde bir hatadır.' })
 
 })
 
@@ -113,12 +114,13 @@ const errorHandler = (error, req, res, next) => {
 
     res.status(statusCode).send({
         error: true,
-        message: error.message,
-        cause:error.cause,
-        stack:error.stack
+        message: error.message, // Hata mesajı
+        cause: error.cause, // Hata neden oluştu ({ cause: '' })
+        stack: error.stack, // Hata orjinal çıktısı
     })
 }
 
+// Error handler son middleware olmalı.
 app.use(errorHandler)
 
 /* ------------------------------------------------------- */

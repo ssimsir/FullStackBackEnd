@@ -64,31 +64,32 @@ const app = http.createServer((req, res) => {
         
         if (req.method == 'GET') {
 
-            //single header
+            // setHeader (single headers)
             res.setHeader('title', 'value')
-
-            //writehead status code ve muti headers
+            // writeHead(statusCode, {  multi headers })
+            // Sonda yeralması gereken methodlardandır.
             // res.writeHead(400, {
-            //     'content-encoding':'utf-8'
-                
+            //     'content-encoding': 'utf-8',
+            //     'multi-headers': 'test',
             // })
-
-            res.writeHead(400, 'hatalı islem', {
-                'content-encoding':'utf-8',
-                'multi-headers': 'test'
+            // writeHead'de 2. parametre olarak statusMessage gönderebiliriz:
+            res.writeHead(400, 'Hatali Islem', {
+                'content-encoding': 'utf-8',
+                'multi-headers': 'test',
             })
-
 
             const obj = {
                 result: true,
                 message: 'Hello World'
             }
-
             res.write(JSON.stringify(obj))
+            
+            // En sonda yer almalıdır:
             res.end()
 
         } else {
-            res.end('wrong method')
+
+            res.end('Wrong Method')
         }
 
     } else {

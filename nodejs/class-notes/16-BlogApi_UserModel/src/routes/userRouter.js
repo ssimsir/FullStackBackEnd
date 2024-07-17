@@ -5,17 +5,22 @@
 
 const router = require('express').Router()
 
-// Call Controllers:
-const { blogCategory, blogPost } = require('../controllers/blogController')
-
+// Call Controller:
+const { user } = require('../controllers/userController')
 
 /* ------------------------------------------------------- */
 
-// URL: /blog ->
+// URL: /user ->
 
-// BlogCategory
-router.route('/category')
-    .post(blogCategory.create)
+router.route('/')
+    .get(user.list)
+    .post(user.create)
+
+router.route('/:userId')
+    .get(user.read)
+    .put(user.update)
+    .patch(user.update)
+    .delete(user.delete)
 
 /* ------------------------------------------------------- */
 module.exports = router

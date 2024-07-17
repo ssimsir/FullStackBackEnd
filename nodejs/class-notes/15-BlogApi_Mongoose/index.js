@@ -10,30 +10,27 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
-//Accept json
+// Accept JSON:
 app.use(express.json())
 
-/* ------------------------------------------------------- */
-//DB connection
-//const dbConnection = require("./src/dbConnection");
-//dbConnection()
+// DB CONNECTION:
+// const dbConnection = require('./src/dbConnection')
+// dbConnection()
+require('./src/dbConnection')()
 
-require("./src/dbConnection")();   //kısa yol
-/* ------------------------------------------------------- */
+// Catch error from async:
+require('express-async-errors')
 
+/* ------------------------------------------------------- */
 
 app.all('/', (req, res) => {
     res.send('WELCOME TO BLOG API')
 })
 
-// continue from here...
 /* ------------------------------------------------------- */
+// Routes:
 
-
-/* ------------------------------------------------------- */
-
-
-/* ------------------------------------------------------- */
+app.use('/blog', require('./src/routes/blogRouter'))
 
 /* ------------------------------------------------------- */
 // Catch Errors:
