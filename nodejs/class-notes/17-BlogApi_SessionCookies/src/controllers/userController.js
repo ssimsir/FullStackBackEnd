@@ -7,6 +7,7 @@
 // const User = require('../models/userModel') // Direct
 const { User } = require('../models/userModel') // In Object
 
+
 /* ------------------------------------------------------- */
 // User Controller:
 

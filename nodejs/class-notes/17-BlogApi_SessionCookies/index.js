@@ -22,14 +22,31 @@ require('./src/dbConnection')()
 require('express-async-errors')
 
 /* ------------------------------------------------------- */
+// SessionCookies:
+// http://expressjs.com/en/resources/middleware/cookie-session.html
+// https://www.npmjs.com/package/cookie-session
+//* $ npm i cookie-session
+
+const session = require('cookie-session') // Session Middleware
+
+app.use(session({ // General Settings.
+    secret: process.env.SECRET_KEY, // Cookie datası şifreleme anahtarı
+    // maxAge: 1000 * 60 * 60 * 24 * 3 // miliSeconds // 3 Days
+}))
+
+/* ------------------------------------------------------- */
 
 app.all('/', (req, res) => {
-    res.send('WELCOME TO BLOG API')
+    res.send({
+        session:req.session,
+        message:'WELCOME TO BLOG API'
+    })
 })
 
 /* ------------------------------------------------------- */
 // Routes:
 
+app.use('/auth', require('./src/routes/authRouter')) // User Model - Login/Logout
 app.use('/user', require('./src/routes/userRouter')) // User Model
 app.use('/blog', require('./src/routes/blogRouter')) // BlogCategory & BlogPost
 
