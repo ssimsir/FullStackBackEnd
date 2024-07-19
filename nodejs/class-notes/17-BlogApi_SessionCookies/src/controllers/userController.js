@@ -28,7 +28,6 @@ module.exports.user = {
     create: async (req, res) => {
 
         const data = await User.create(req.body)
-
         res.status(201).send({
             error: false,
             result: data
