@@ -54,8 +54,13 @@ app.all("/", (req, res) => {
   });
 });
 
+//departments
 app.use("/departments", require("./src/routes/department.router"));
 
+//personnels
+app.use("/personnels", require("./src/routes/personnel.router"));
+
+//not found routes
 app.all("*", async (req, res) => {
   res.status(404).send({
     error: true,
@@ -66,17 +71,11 @@ app.all("*", async (req, res) => {
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));
 
-
-    
-
-
-
 // RUN SERVER:
 app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
 // require('./src/helpers/sync')()
-
-require("./src/helpers/dataCreate")()
+require('./src/helpers/dataCreate')()
 
