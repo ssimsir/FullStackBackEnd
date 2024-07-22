@@ -163,13 +163,13 @@ async function dataCreate () {
 	await Department.deleteMany( {} );
 	await Department.insertMany( departments )
 
-	await Personnel.deleteMany( {} );
-	let isFirstAccount = ( await Personnel.countDocuments() ) === 0;
-	// await Personnel.insertMany( personnels )
-	for ( const personnel of personnels ) {
-		personnel.isAdmin = isFirstAccount ? true : false;
-		isFirstAccount = false;
-		await Personnel.create( personnel );
-	}
+	// await Personnel.deleteMany( {} );
+	// let isFirstAccount = ( await Personnel.countDocuments() ) === 0;
+	// // await Personnel.insertMany( personnels )
+	// for ( const personnel of personnels ) {
+	// 	personnel.isAdmin = isFirstAccount ? true : false;
+	// 	isFirstAccount = false;
+	// 	await Personnel.create( personnel );
+	// }
 }
 module.exports = dataCreate
