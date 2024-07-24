@@ -1,27 +1,23 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
+const router = require("express").Router();
+/* ------------------------------------------------------- */
 
-const Personnel = require('../models/personnel.model')
+const token = require("../controllers/token.controller");
 
-cont 
+/* ------------------------------------------------------- */
 
-/*------------------------------------------------------- */
+router.route("/")
+    .get(token.list)
+    .post(token.create);
 
-/*------------------------------------------------------- */
+router.route("/:id")
+  .get(token.read)
+  .put(token.update)
+  .patch(token.update)
+  .delete(token.delete);
 
-/*------------------------------------------------------- */
+module.exports = router;
 
-/*------------------------------------------------------- */
-
-
-module.exports = {
-
-   login: async(req, res) => {
-
-   },
-   logout: async(req, res) => {
-
-   }
-}
