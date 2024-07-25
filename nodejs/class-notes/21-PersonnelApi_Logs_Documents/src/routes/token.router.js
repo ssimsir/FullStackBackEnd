@@ -7,7 +7,8 @@ const router = require("express").Router();
 
 const token = require("../controllers/token.controller");
 
-const { isAdmin } = require('../middlewares/permission')
+const { isAdmin } = require('../middlewares/permissions')
+
 /* ------------------------------------------------------- */
 
 // router.route("/")
@@ -20,19 +21,21 @@ const { isAdmin } = require('../middlewares/permission')
 //   .patch(isAdmin, token.update)
 //   .delete(isAdmin, token.delete);
 
+/* ------------------------------------------------------- */
 
-router.use(isAdmin)   //bu şekilde tamamına is admin verilir
+router.use(isAdmin)
 
 router.route("/")
-   .get(token.list)
-   .post(token.create);
+  .get(token.list)
+  .post(token.create);
 
 router.route("/:id")
-   .get(token.read)
-   .put(token.update)
-   .patch(token.update)
-   .delete(token.delete);
+  .get(token.read)
+  .put(token.update)
+  .patch(token.update)
+  .delete(token.delete);
 
+/* ------------------------------------------------------- */
 
 module.exports = router;
 
