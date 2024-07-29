@@ -70,8 +70,11 @@ app.use(morgan('combined',
 ))
 
 
-
-
+/* ------------------------------------------------------- */
+//Documantation
+//$ npm i swagger-autogen
+//$ npm i swagger-ui-express
+//$ npm i redoc-express
 /* ------------------------------------------------------- */
 
 // Authentication Middleware:
