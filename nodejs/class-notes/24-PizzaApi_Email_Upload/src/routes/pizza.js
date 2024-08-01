@@ -4,6 +4,23 @@
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
+// UPLOAD (multer middleware)
+// npm i multer
+// https://expressjs.com/en/resources/middleware/multer.html
+
+const multer = require('multer')
+
+const upload = multer({
+  //dest: './uploads'
+  storage:multer.diskStorage({
+    destination:'./upload',
+    
+
+  })
+
+})
+
+/* ------------------------------------------------------- */
 // routes/pizza:
 
 const pizza = require("../controllers/pizza");

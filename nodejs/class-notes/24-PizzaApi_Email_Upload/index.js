@@ -50,7 +50,7 @@ app.use(require("./src/middlewares/queryHandler"));
 // NodeMailer.com
 // npm install nodemailer
 
-const nodemailer = require('nodemailer')
+// const nodemailer = require('nodemailer')
 
 // Create Test Account:
 // nodemailer.createTestAccount().then((data) => console.log(data))
@@ -71,18 +71,60 @@ const nodemailer = require('nodemailer')
 */
 
 //Connect to MailServer / SMTP
-const transporter = nodemailer.createTransport({  //sunucuya bağlanma
-  //SMTP :
-  host:'smtp.ethereal.email',
-  port:'587',
-  secure:false,
-  auth:{
-    user:'torrance.stokes@ethereal.email',
-    pass:'EdEV9m47bPKdXtDzXC'
-  }
+// const transporter = nodemailer.createTransport({  //sunucuya bağlanma
+//   //SMTP :
+//   host:'smtp.ethereal.email',
+//   port:'587',
+//   secure:false,
+//   auth:{
+//     user:'torrance.stokes@ethereal.email',
+//     pass:'EdEV9m47bPKdXtDzXC'
+//   }
 
-}) 
-console.log(transporter)
+// }) 
+// //console.log(transporter)
+
+// //Send Mail
+// transporter.sendMail({
+//   //from:'torrance.stokes@ethereal.email' kullanılmayadabilir
+//   to:'sadik.simsir100@gmail.com',
+//   subject:'Hello',
+//   text:'Hello there how are you',     
+//   html:'<p><b>Hello  There</b><br>How are you</br></p>',
+
+  
+// }, function(error, success){
+//   success ? console.log('SUCCESS: ', success) : console.log('ERROR : ', error)
+// })
+
+//* Gmail bağlantısı
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',     //populer mail servisleri için kısa tanım
+//   auth:{
+//     user:'sadik.simsir100@gmail.com',
+//     pass:'Blk201084'  //app passwordan alınan şifre kullanılacak
+//   }
+// })
+
+//* Yandex bağlantısı
+// const transporter = nodemailer.createTransport({
+//   service: 'yandex',     //populer mail servisleri için kısa tanım
+//   auth:{
+//     user:'sadik.simsir100@gmail.com',  
+//     pass:'Blk201084'  //yandex kullanıcı adı ve şifre girilecek
+//   }
+// })
+
+// transporter.sendMail({
+//   //from:'torrance.stokes@ethereal.email' kullanılmayadabilir
+//   to:'sadik.simsir100@gmail.com',
+//   subject:'Hello',
+//   text:'Hello there how are you',     
+//   html:'<p><b>Hello  There</b><br>How are you</br></p>'
+// }, function(error, success){
+//   success ? console.log('SUCCESS: ', success) : console.log('ERROR : ', error)
+// })
+
 /* ------------------------------------------------------- */
 // Routes:
 
