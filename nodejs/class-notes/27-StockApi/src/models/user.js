@@ -94,5 +94,36 @@ const UserSchema = new mongoose.Schema({
 })
 
 /* ------------------------------------------------------- */
+//https://mongoosejs.com/docs/middleware.html
+
+const passwordEncrypt = require('../helpers/passwordEncrypt')
+
+UserSchema.pre(['save', 'updateOne'], function (next) {
+
+    const data = this?._update ?? this
+
+    //Email control
+    const isEmailValidated = data.email ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email) : true
+
+    if (isEmailValidated) {
+        const isPasswordValidated = data.password ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(data.password) : true
+        if (isPasswordValidated) {
+            if (this?._update){
+                this._update.password = passwordEncrypt(data.password)
+            }else{
+                this.password = passwordEncrypt(data.password)
+            }
+            
+            next()
+        } else {
+            next(new Error('Password is not validated'))
+        }
+    } else {
+        //throw new Error ('Email is not validated')
+        next(new Error('Email is not validated'))
+    }
+})
+
+/* ------------------------------------------------------- */
 // Exports:
 module.exports = mongoose.model('User', UserSchema)
