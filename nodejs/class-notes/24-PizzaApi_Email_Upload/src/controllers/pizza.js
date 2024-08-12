@@ -70,7 +70,11 @@ module.exports = {
             #swagger.tags = ["Pizzas"]
             #swagger.summary = "Update Pizza"
         */
+    /*FİLE*/
+    console.log(req.file)    //upload single
+    console.log(req.files)    //array or any
 
+    /*FİLE*/
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
