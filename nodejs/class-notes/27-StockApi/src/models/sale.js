@@ -5,7 +5,7 @@
 const { mongoose } = require('../configs/dbConnection')
 /* ------------------------------------------------------- */
 
-const PurchaseSchema = new mongoose.Schema({
+const SaleSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -41,9 +41,9 @@ const PurchaseSchema = new mongoose.Schema({
         transform:function(){return this.price * this.quantity},
     }
 
-
-
 }, {
-    collation: 'product',
+    collation: 'sale',
     timestamps: true
 })
+
+module.exports = mongoose.model('Sale', SaleSchema)
