@@ -4,11 +4,11 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-//routes/user
+// routes/user:
 
 const user = require('../controllers/user')
 
-//URL : /users
+// URL: /users
 
 router.route('/')
     .get(user.list)
@@ -16,9 +16,10 @@ router.route('/')
 
 router.route('/:id')
     .get(user.read)
-    .put(user.create)
-    .patch(user.create)
+    .put(user.update)
+    .patch(user.update)
     .delete(user.delete)
 
 /* ------------------------------------------------------- */
-module.exports=router
+// Exports:
+module.exports = router

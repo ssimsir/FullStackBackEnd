@@ -4,11 +4,11 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-//routes/token
+// routes/token:
 
 const token = require('../controllers/token')
 
-//URL : /tokens
+// URL: /tokens
 
 router.route('/')
     .get(token.list)
@@ -16,9 +16,10 @@ router.route('/')
 
 router.route('/:id')
     .get(token.read)
-    .put(token.create)
-    .patch(token.create)
+    .put(token.update)
+    .patch(token.update)
     .delete(token.delete)
 
 /* ------------------------------------------------------- */
-module.exports=router
+// Exports:
+module.exports = router
