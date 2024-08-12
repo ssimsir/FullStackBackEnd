@@ -25,7 +25,7 @@ module.exports = {
 
         const data = await res.getModelList(User)
         res.status(200).send({
-            error:false,
+            error: false,
             details: await res.getModelListDetails(User),
             data
         })
@@ -33,18 +33,75 @@ module.exports = {
     },
 
     create: async (req, res) => {
-
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Create User"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    "username": "test",
+                    "password": "1234",
+                    "email": "test@site.com",
+                    "firstName": "test",
+                    "lastName": "test",
+                }
+            }
+        */
+        const data = await User.create(req.body)
+        res.status(201).send({
+            error: false,
+            data
+        })
     },
 
     read: async (req, res) => {
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Get Single User"
+        */
 
+        const data = User.findOne({ _id: req.params.id })
+        res.status(200).send({
+            error: false,
+            data
+        })
     },
 
     update: async (req, res) => {
+        /*
+                #swagger.tags = ["Users"]
+                #swagger.summary = "Update User"
+                #swagger.parameters['body'] = {
+                    in: 'body',
+                    required: true,
+                    schema: {
+                        "username": "test",
+                        "password": "1234",
+                        "email": "test@site.com",
+                        "firstName": "test",
+                        "lastName": "test",
+                    }
+                }
+        */
+        const data = await User.updateOne({_id:req.params.id}, req.body, {runValidators:true})
+        res.status(202).send({
+            error: false,
+            data,
+            new:await User.findOne({_id:req.params.id})
+        })
 
     },
 
     delete: async (req, res) => {
-
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Delete User"
+        */
+       const data = await User.deleteOne({_id:req.params.id})
+       res.status(data.deletedCount ? 204 : 404).send({
+        error: !data.deletedCount,
+        data
+    })
     }
 }
