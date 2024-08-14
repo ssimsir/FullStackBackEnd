@@ -57,7 +57,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        uniqu: true,
+        unique: true,
         index: true
     },
 
@@ -93,35 +93,49 @@ const UserSchema = new mongoose.Schema({
     timestamps: true
 })
 
-/* ------------------------------------------------------- *
-//https://mongoosejs.com/docs/middleware.html
+/* ------------------------------------------------------- */
+// https://mongoosejs.com/docs/middleware.html
 
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 
 UserSchema.pre(['save', 'updateOne'], function (next) {
 
+    // console.log('pre-save çalıştı.')
+    // console.log(this)
+
+    // Güncellerken: data = this._update || Kaydederken: data = this
     const data = this?._update ?? this
 
-    //Email control
+    // Email Control:
     const isEmailValidated = data.email ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email) : true
 
     if (isEmailValidated) {
+
+        // console.log('Email is OK')
+
         const isPasswordValidated = data.password ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(data.password) : true
+
         if (isPasswordValidated) {
-            if (this?._update){
+
+            if (this?._update) {
+                // UPDATE:
                 this._update.password = passwordEncrypt(data.password)
-            }else{
+            } else {
+                // CREATE:
                 this.password = passwordEncrypt(data.password)
             }
-            
+
             next()
+
         } else {
-            next(new Error('Password is not validated'))
+            // throw new Error('Password is not validated.')
+            next(new Error('Password is not validated.'))
         }
     } else {
-        //throw new Error ('Email is not validated')
-        next(new Error('Email is not validated'))
+        // throw new Error('Email is not validated.')
+        next(new Error('Email is not validated.'))
     }
+
 })
 
 /* ------------------------------------------------------- */

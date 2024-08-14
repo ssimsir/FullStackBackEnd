@@ -6,30 +6,6 @@
 
 const User = require('../models/user')
 
-
-/*------------------------------------------------------- */
-
-const passwordEncrypt = require('../helpers/passwordEncrypt')
-
-//data = req.body
-const checkUserEmailAndPassword = function (data) {
-
-    //Email control
-    const isEmailValidated = data.email ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email) : true
-
-    if (isEmailValidated) {
-        const isPasswordValidated = data.password ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(data.password) : true
-        if (isPasswordValidated) {
-            data.password=passwordEncrypt(data.password)           
-        } else {
-            throw new Error('Password is not validated')
-        }
-    } else {
-        throw new Error('Password is not validated')
-    }
-
-}
-/*------------------------------------------------------- */
 module.exports = {
 
     list: async (req, res) => {
@@ -74,9 +50,7 @@ module.exports = {
             }
         */
 
-        //const data = await User.create(req.body)
-
-        const data = await User.create(checkUserEmailAndPassword(req.body))
+        const data = await User.create(req.body)
 
         res.status(201).send({
             error: false,
@@ -116,11 +90,9 @@ module.exports = {
             }
         */
 
-        //const data = await User.findByIdAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
+        // const data = await User.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
+        const data = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
 
-
-        //const data = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
-        const data = await User.updateOne({ _id: req.params.id },checkUserEmailAndPassword(req.body), { runValidators: true })
         res.status(202).send({
             error: false,
             data,
@@ -136,7 +108,7 @@ module.exports = {
         */
 
         const data = await User.deleteOne({ _id: req.params.id })
-
+    
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,
             data
