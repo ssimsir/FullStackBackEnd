@@ -98,6 +98,7 @@ module.exports = {
             #swagger.summary = "Delete Purchase"
         */
 
+            
         const data = await Purchase.deleteOne({ _id: req.params.id })
     
         res.status(data.deletedCount ? 204 : 404).send({
