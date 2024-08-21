@@ -1,0 +1,18 @@
+#Altyapı
+FROM node:current-alpine3.20
+
+#Çalışma alanı
+WORKDIR /frontend
+
+#Dosyaları Aktar
+#COPY hello.js /app
+COPY . .
+
+RUN npm i -g pnpm
+RUN pnpm i
+
+#Komut Çalıştır
+#CMD node hello.js
+CMD [ "npm", "start" ]
+
+EXPOSE 5173
