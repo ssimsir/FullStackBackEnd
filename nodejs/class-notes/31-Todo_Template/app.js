@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 8000;
 // Accept json data and convert to object:
 app.use(express.json())
 
+app.use(express.urlencoded({extended:true}))
+
 // AsyncErrors to errorHandler:
 require('express-async-errors')
 

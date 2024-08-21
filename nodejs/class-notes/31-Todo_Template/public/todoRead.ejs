@@ -13,34 +13,26 @@
         <h1>FullStack Todo Template Project</h1>
         <hr>
         <div class="rows">
-            <h2>TODO CREATE</h2>
+            <h2>TODO READ</h2>
             <p><a href="/view" class="btn btn-link">Todo List</a></p>
-            <form action="" method="POST">
+            
                 <table class="table table-striped">
                     <tr>
-                        <td>Priority:</td>
-                        <td>
-                            <select class="form-select" name="priority">
-                                <%for(let key in priorities){%>
-                                    <option value="<%=key%>"><%=priorities[key]%></option>
-                                    <%}%>
-                                
-                            </select>    
-                        </td>
+                        <td>ID:</td>
+                        <td>#<%todo.id%></td>
+                        
                     </tr>
                     <tr>
                         <td>Title:</td>
-                        <td><input type="text" class="form-control" name="title" /></td>
+                        <td>dsfds</td>
                     </tr>
                     <tr>
                         <td>Description:</td>
                         <td><textarea class="form-control" name="description"></textarea></td>
                     </tr>
                 </table>
-                <p>
-                    <button class="btn btn-primary" type="submit">CREATE</button>
-                </p>
-            </form>
+    
+            
         </div>
     </div>
 </body>
